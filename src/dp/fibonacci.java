@@ -2,7 +2,7 @@ package dp;
 
 import java.util.Arrays;
 
-public class practice1 {
+public class fibonacci {
     public static void main(String[] args) {
         System.out.println("Fibonacci is: " + helper(75));
         System.out.println("Fibonacci is: " + fib(75));
