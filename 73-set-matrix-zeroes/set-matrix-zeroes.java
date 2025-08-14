@@ -28,5 +28,8 @@ class Solution {
             }
         }
 
+        // Time: \U0001d442(\U0001d45a×\U0001d45b) — two full passes over the matrix.
+        // Space: \U0001d442(\U0001d45a+\U0001d45b)— extra arrays row[m] and column[n].
+        
     }
 }
