@@ -1,5 +1,9 @@
 class Solution {
     public List<List<Integer>> generate(int numRows) {
+        return generateBruteForce(numRows);
+    }
+
+    private List<List<Integer>> generateBruteForce(int numRows){
         List<List<Integer>> res = new ArrayList<>();
         if (numRows <= 0) return res;
 
