@@ -26,5 +26,8 @@ class Solution {
 
         dp[n][target] = res ? 1 : 0;
         return res;
+
     }
 }
+        // Time: O(n * target)
+        // Space: O(n * target) for memo + O(n) recursion stack.
