@@ -40,3 +40,11 @@ class Solution {
         }
     }
 }
+
+/*
+⏱️ Time Complexity: O(n)
+   - Pivot search O(n), just-larger search O(n) worst-case, reverse O(n), but sab linear passes hi hain.
+
+\U0001f4be Space Complexity: O(1)
+   - In-place swaps/reverse, koi extra array nahi.
+*/
