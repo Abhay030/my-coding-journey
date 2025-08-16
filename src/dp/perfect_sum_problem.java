@@ -34,6 +34,44 @@ public class perfect_sum_problem {
         }
 }
 
+//class Solution {
+//    // Function to calculate the number of subsets with a given sum
+//    private static final int MOD = 1_000_000_007;
+//    public int perfectSum(int[] nums, int target) {
+//        // code here
+//        int n = nums.length;
+//        int dp[][] = new int[n][target+1];
+//        for(int i =0; i<n; i++) Arrays.fill(dp[i] , -1);
+//
+//        return perfectSumDp(n-1 , nums , target , dp);
+//    }
+//
+//    private int perfectSumDp(int n , int nums[] , int target , int dp[][]){
+//        // Base case
+//        if (n == 0) {
+//            if (target == 0 && nums[0] == 0) return 2; // take or not take 0
+//            if (target == 0 || nums[0] == target) return 1;
+//            return 0;
+//        }
+//
+//        // check subproblem solution
+//        if(dp[n][target] != -1) return dp[n][target];
+//
+//        // save the subproblem solution in the dp array.
+//        int notTake = perfectSumDp(n - 1, nums, target, dp);
+//        int take = 0;
+//
+//        if (nums[n] <= target) {
+//            take = perfectSumDp(n - 1, nums, target - nums[n], dp);
+//        }
+//
+//        dp[n][target] = (take + notTake) % MOD;
+//
+//        // return the last index the dp array , as the anseer is always saved in the last index
+//        return dp[n][target];
+//    }
+//
+//}
 
 
 
