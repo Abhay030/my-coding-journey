@@ -25,7 +25,6 @@ class Solution {
 
         while(itr.next != null){
             if(toDelete.contains(itr.next.val)){
-                // itr.val = itr.next.val;
                 itr.next = itr.next.next;          
             }
             else itr = itr.next;
