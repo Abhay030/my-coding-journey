@@ -11,7 +11,8 @@
 class Solution {
     public boolean isPalindrome(ListNode head) {
     //    return solveUsingString(head);
-       return solveUsingReverse(head);
+    //    return solveUsingReverse(head);
+       return solveUsingArrayList(head);
 
     }
 
@@ -71,7 +72,6 @@ class Solution {
 
         return true;
     }
-
     private ListNode reverseLL(ListNode head){
         ListNode prev = null , curr = head;
 
@@ -84,5 +84,27 @@ class Solution {
         }
 
         return prev;
+    }
+
+    private boolean solveUsingArrayList(ListNode head){
+        List<Integer> list = new ArrayList<>();
+
+        // populate the list
+        while(head != null){
+            list.add(head.val);
+            head = head.next;
+        }
+
+        // use two pointer to check palindrome
+        int left = 0;
+        int right = list.size()-1;
+
+        while(left < right){
+            // if value at left is not equal the value at right
+            if(list.get(left++) != list.get(right--)){
+                return false;
+            }            
+        }
+        return true;
     }
 }
