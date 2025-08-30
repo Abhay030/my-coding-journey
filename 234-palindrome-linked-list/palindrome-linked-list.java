@@ -10,7 +10,13 @@
  */
 class Solution {
     public boolean isPalindrome(ListNode head) {
-        if(head.next == null || head == null) return true;
+    //    return solveUsingString(head);
+       return solveUsingReverse(head);
+
+    }
+
+    private boolean solveUsingString(ListNode head){
+         if(head.next == null || head == null) return true;
         StringBuilder firsthalf = new StringBuilder();
         ListNode slow = head , fast = head;
 
@@ -39,5 +45,44 @@ class Solution {
 
         return true;
 
+    }
+
+    private boolean solveUsingReverse(ListNode head){
+        ListNode slow = head , fast = head;
+
+        // find the middle
+        while (fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // reverse the second half 
+        ListNode secondhalf = reverseLL(slow);
+
+        // compare the first half and the second half
+        ListNode p1 = head , p2 = secondhalf;
+        while(p1 != null && p2 != null){
+            if(p1.val != p2.val){
+                return false;
+            }
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+
+        return true;
+    }
+
+    private ListNode reverseLL(ListNode head){
+        ListNode prev = null , curr = head;
+
+        while(curr != null){
+            ListNode agla = curr.next;
+
+            curr.next = prev;
+            prev = curr;
+            curr = agla;
+        }
+
+        return prev;
     }
 }
