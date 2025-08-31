@@ -11,19 +11,19 @@
  */
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        if (headA == null || headB == null) return null;
+        ListNode l1 = headA;
+        ListNode l2 = headB;
 
-        ListNode temp1 = headA;
-        ListNode temp2 = headB;
+        while(l1 != l2){
+            l1 = (l1 != null) ? l1.next : headB;
+            l2 = (l2 != null) ? l2.next : headA;
 
-        // loop will exit when they intersect or either they both are null.
-        while (temp1 != temp2) {
-            // traverse the first LL and then second also so ultimately they will travel l1+l2 = l2+l1 which will 
-            // be same for both ,  hence they will meet at a common place.
-            temp1 = (temp1 != null) ? temp1.next : headB;
-            temp2 = (temp2 != null) ? temp2.next : headA;
+            if(l1 == l2){
+                return l1;
+            }
         }
 
-        return temp1;
+        return l1;
+
     }
 }
