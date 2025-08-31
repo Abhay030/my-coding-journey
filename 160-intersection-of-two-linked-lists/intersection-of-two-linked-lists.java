@@ -17,10 +17,6 @@ public class Solution {
         while(l1 != l2){
             l1 = (l1 != null) ? l1.next : headB;
             l2 = (l2 != null) ? l2.next : headA;
-
-            if(l1 == l2){
-                return l1;
-            }
         }
 
         return l1;
