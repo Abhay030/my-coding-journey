@@ -10,7 +10,23 @@
  */
 class Solution {
     public ListNode removeNodes(ListNode head) {
-       return bruteForce(head);
+    //    return bruteForce(head);
+        return removeNodeRec(head);
+    }
+
+    private static ListNode removeNodeRec(ListNode head){
+        // if head is null and head.next is null then remove 
+        if(head == null || head.next == null){
+            return head;
+        }
+
+        head.next = removeNodeRec(head.next);
+
+        if(head.val < head.next.val){
+            return head.next; // skip the current element
+        }
+
+        return head;
     }
 
     private static ListNode bruteForce(ListNode head){
