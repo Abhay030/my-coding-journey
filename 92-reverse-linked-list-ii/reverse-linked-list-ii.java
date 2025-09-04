@@ -10,11 +10,13 @@
  */
 class Solution {
     public ListNode reverseBetween(ListNode head, int left, int right) {
+        // iterate till left - 1;
         ListNode prev = head;
         for(int i = 1; i<left; i++){
             prev = prev.next;
         }
         
+        // store the values from left to right
         List<Integer> list = new ArrayList<>();
         ListNode ptr = prev;
         for(int i = left; i <= right; i++){
@@ -22,6 +24,7 @@ class Solution {
             ptr = ptr.next;
         }
 
+        // update the values from left to right
         for(int i = right-left; i >= 0; i--){
             prev.val = list.get(i);
             prev = prev.next;
