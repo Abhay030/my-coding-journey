@@ -11,7 +11,8 @@
 class Solution {
     public ListNode removeNodes(ListNode head) {
     //    return bruteForce(head);
-        return removeNodeRec(head);
+        // return removeNodeRec(head);
+        return optimisedMonoStack(head);
     }
 
     private static ListNode removeNodeRec(ListNode head){
@@ -61,5 +62,31 @@ class Solution {
 
         return dummy.next;
 
+    }
+
+    private static ListNode optimisedMonoStack(ListNode head){
+        // store the values which we want to keep
+        Stack<ListNode> stack = new Stack<>();
+        ListNode ptr = head;
+
+        // step1 : push all the value which are greater and remove the smaller once
+        while(ptr != null){
+            while(!stack.isEmpty() && ptr.val > stack.peek().val){
+                stack.pop();
+            }
+            stack.push(ptr);
+            ptr = ptr.next;
+        }
+
+        // step2: create the list by popping the elements from the stack
+        ListNode newNode = null;    
+        while(!stack.isEmpty()){
+            ListNode node = stack.pop();
+            node.next = newNode;
+            newNode = node;
+        }
+
+        // return the new list
+        return newNode;
     }
 }
