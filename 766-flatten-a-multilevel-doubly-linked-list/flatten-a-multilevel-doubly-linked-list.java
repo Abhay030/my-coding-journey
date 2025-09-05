@@ -12,9 +12,12 @@ class Solution {
     public Node flatten(Node head) {
         if(head == null) return null;
         Node ptr = head;
-        // Node contList = null;
+        
+        // store the node from where we have to continue the list
         Stack<Node> stack = new Stack<>();
-        Node lastNode = null;
+        Node lastNode = null; // pointer to the last node of the list
+
+        // itr and modify the child and real list relation
         while(ptr != null){
             if(ptr.child != null){
                 stack.push(ptr.next);
@@ -29,6 +32,7 @@ class Solution {
             }
         }
 
+        // pop the elements and then connect the remaining list after child
         while(!stack.isEmpty()){
             Node nextNode = stack.pop();
             if(nextNode != null){
@@ -36,7 +40,7 @@ class Solution {
                 nextNode.prev = lastNode;
 
                 while(nextNode.next != null){
-                nextNode = nextNode.next;
+                    nextNode = nextNode.next;
                 }
                 lastNode = nextNode;
             }
