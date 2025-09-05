@@ -12,6 +12,7 @@ class Solution {
     public ListNode rotateRight(ListNode head, int k) {
         if(head == null) return null;
         
+        // step: find the mod of the long length to reduce the number of 
         ListNode itr = head;
         int length = 0;
         while(itr != null){
@@ -19,7 +20,9 @@ class Solution {
             length++;
         }
 
-        k = k % length;
+        k = k % length; // reduced rotation
+
+        // crop and add the last node to to start
         while(k != 0){
             ListNode ptr = head;
             ListNode slow = ptr;
