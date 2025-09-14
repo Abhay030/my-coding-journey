@@ -15,7 +15,8 @@ class Solution {
         ArrayList<Integer> lesser = new ArrayList<>();
         ArrayList<Integer> greater = new ArrayList<>();
         
-        ListNode itr = head;
+        ListNode itr = head; // pointer to iterate 
+        // put the lesser and greater values in the list
         while(itr != null){
             if(itr.val < x){
                 lesser.add(itr.val);
@@ -24,10 +25,10 @@ class Solution {
             itr = itr.next;
         }
         itr = head; // reset itr
-        int i = 0;
+        int i = 0;  // pointer to get values from the list
 
         int lsize = lesser.size();
-        // int gsize = greater.size();
+        // modify the values in the list.
         while(itr != null){
             if(i < lsize){
                 itr.val = lesser.get(i);
