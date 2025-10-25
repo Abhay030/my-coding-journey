@@ -1,5 +1,8 @@
 class Solution {
     public void moveZeroes(int[] nums) {
+        moveZerosBrute(nums);
+    }
+    public void moveZerosBrute(int[] nums){
         int lastZero = 0;
         int count = 0;
         int n = nums.length;
@@ -14,6 +17,5 @@ class Solution {
         for(int i = n-1; i >= n-count; i--){
             nums[i] = 0;
         }
-
     }
 }
