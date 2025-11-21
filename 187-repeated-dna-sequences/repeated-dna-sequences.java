@@ -1,6 +1,22 @@
 class Solution {
     public List<String> findRepeatedDnaSequences(String s) {
-        int n = s.length();
+        return findRepeatedDnaSequences2(s);
+
+        // return findRepeatedDnaSequences1(s);
+    }
+    
+    private List<String> findRepeatedDnaSequences1(String s) {
+        Set seen = new HashSet(), repeated = new HashSet();
+        for (int i = 0; i + 9 < s.length(); i++) {
+            String ten = s.substring(i, i + 10);
+            if (!seen.add(ten))
+                repeated.add(ten);
+        }
+        return new ArrayList(repeated);
+    }
+
+    private List<String> findRepeatedDnaSequences2(String s){
+         int n = s.length();
 
         // convert to the stringbuilder for more better performance.
         StringBuilder str = new StringBuilder(s);
@@ -33,5 +49,6 @@ class Solution {
 
         return resultList;
     }
+
 }
        
