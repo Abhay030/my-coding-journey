@@ -1,10 +1,10 @@
 class Solution {
     public List<String> findRepeatedDnaSequences(String s) {
-        return findRepeatedDnaSequences2(s);
+        // return findRepeatedDnaSequences2(s);
 
-        // return findRepeatedDnaSequences1(s);
+        return findRepeatedDnaSequences1(s);
     }
-    
+
     private List<String> findRepeatedDnaSequences1(String s) {
         Set seen = new HashSet(), repeated = new HashSet();
         for (int i = 0; i + 9 < s.length(); i++) {
