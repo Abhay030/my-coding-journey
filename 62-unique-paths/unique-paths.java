@@ -4,7 +4,8 @@ class Solution {
         for(int[] row : dp) Arrays.fill(row , -1);
         // return totalPaths(m-1 , n-1);
         // return totalPaths1(m-1 , n-1 , dp);
-        return totalPaths2(m-1 , n-1);
+        // return totalPaths2(m-1 , n-1);
+        return totalPaths3(m-1 , n-1);
     }
 
     // pure recursion
@@ -41,6 +42,7 @@ class Solution {
         return dp[row][column];
     }
 
+    // tabulation solution
     private int totalPaths2(int row , int column){
         int[][] dp = new int[row +1][column +1];
         
@@ -60,5 +62,28 @@ class Solution {
 
         return dp[row][column];
 
+    }
+
+    // space optimisation
+    private int totalPaths3(int row, int column) {
+
+        int[] dp = new int[column + 1];
+
+        // base case: start cell
+        dp[0] = 1;
+
+        for (int i = 0; i <= row; i++) {
+            for (int j = 0; j <= column; j++) {
+
+                if (i == 0 && j == 0) continue;
+
+                int up = (i > 0) ? dp[j] : 0;
+                int left = (j > 0) ? dp[j - 1] : 0;
+
+                dp[j] = up + left;
+            }
+        }
+
+        return dp[column];
     }
 }
