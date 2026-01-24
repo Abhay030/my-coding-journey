@@ -1,33 +1,34 @@
 class Solution {
     public boolean canPartition(int[] nums) {
-        int target = 0;
-        int n = nums.length;
-        for(Integer num : nums){
-            target += num;
+        int sum = 0;
+        for(int num : nums){
+            sum += num;
         }
-        if(target % 2 != 0) return false;
+        if(sum % 2 != 0) return false;
 
-        int[][] dp = new int[n][target+1];
-        for(int i = 0; i<n; i++) Arrays.fill(dp[i] , -1);
-        return canPartition(nums , n-1, target/2 , dp);
+        int n = nums.length;
+        Boolean dp[][] = new Boolean[n][sum+1];
+
+        return checkSum(n-1 ,  sum/2 , nums , dp);
     }
 
-    private boolean canPartition(int[] nums , int n , int target , int[][] dp){
-        if( target == 0 ) return true;
-        if( n == -1) return false;
+    private boolean checkSum(int n , int sum , int[] nums , Boolean[][] dp){
+        if( sum == 0 ) return true;
+        if(n < 0) return false;
 
-        if(dp[n][target] != -1) return dp[n][target] == 1;
+        // each state of the dp shows that the reuired sum can be achieved from the nth index of the nums.
+        if(dp[n][sum] != null) return dp[n][sum];
 
-        boolean res;
-        if(target >= nums[n]){
-            res =  canPartition(nums , n-1 , target - nums[n] , dp) || canPartition(nums , n-1 , target+0 , dp);
-        }
-        else res = canPartition(nums , n-1 , target , dp);
+        boolean notake = checkSum(n - 1 , sum , nums , dp);
+        boolean take = false;
 
-        dp[n][target] = res ? 1 : 0;
-        return res;
+        if(nums[n] <= sum){
+            take = checkSum(n - 1 , sum - nums[n], nums , dp);
+        } 
+
+        dp[n][sum] = take || notake;
+
+        return dp[n][sum];
 
     }
 }
-        // Time: O(n * target)
-        // Space: O(n * target) for memo + O(n) recursion stack.
