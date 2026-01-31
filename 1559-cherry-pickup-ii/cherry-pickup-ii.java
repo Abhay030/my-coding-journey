@@ -10,9 +10,11 @@ class Solution {
         }
         // return solve(0, 0, m - 1, n, m, grid, dp);
 
-        return solve2(n , m , grid);
+        // return solve2(n , m , grid);
+
+        return solve3(n , m , grid);
 	}
-    
+    //  tabulation
     public int solve2(int n, int m, int[][] grid) {
         // 3D DP table
         int[][][] dp = new int[n][m][m];
@@ -52,7 +54,7 @@ class Solution {
         }
         return dp[0][0][m-1];
     }
-
+    // memoisation
 	private static int solve(int i , int j1 , int j2 , int n , int m , int[][] grid , int[][][] dp){
 		// boundary check 
 		if(j1 < 0 || j1 >= m || j2 >= m || j2 < 0){
@@ -86,4 +88,53 @@ class Solution {
 		return dp[i][j1][j2];
 
 	}
+    // space optimised
+    private int solve3(int n, int m, int[][] grid) {
+        // Next row dp array
+        int[][] next = new int[m][m];
+        // Current row dp array
+        int[][] curr = new int[m][m];
+        
+        // Base case: last row
+        for (int j1 = 0; j1 < m; j1++) {
+            for (int j2 = 0; j2 < m; j2++) {
+                if (j1 == j2) next[j1][j2] = grid[n-1][j1];
+                else next[j1][j2] = grid[n-1][j1] + grid[n-1][j2];
+            }
+        }
+        
+        // Fill DP table bottom-up
+        for (int i = n - 2; i >= 0; i--) {
+            for (int j1 = 0; j1 < m; j1++) {
+                for (int j2 = 0; j2 < m; j2++) {
+                    int maxi = (int)(-1e9);
+                    int currChoco = (j1 == j2) ? grid[i][j1] 
+                                               : grid[i][j1] + grid[i][j2];
+                    // Try all 9 moves
+                    for (int dj1 = -1; dj1 <= 1; dj1++) {
+                        for (int dj2 = -1; dj2 <= 1; dj2++) {
+                            int newJ1 = j1 + dj1;
+                            int newJ2 = j2 + dj2;
+                            if (newJ1 >= 0 && newJ1 < m &&
+                                newJ2 >= 0 && newJ2 < m) {
+                                maxi = Math.max(maxi, currChoco + 
+                                                next[newJ1][newJ2]);
+                            } else {
+                                maxi = Math.max(maxi, (int)(-1e9));
+                            }
+                        }
+                    }
+                    curr[j1][j2] = maxi;
+                }
+            }
+            // Move current row to next row
+            for (int j1 = 0; j1 < m; j1++) {
+                for (int j2 = 0; j2 < m; j2++) {
+                    next[j1][j2] = curr[j1][j2];
+                }
+            }
+        }
+        // Answer is starting position
+        return next[0][m-1];
+    }
 }
