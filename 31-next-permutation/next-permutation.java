@@ -1,50 +1,44 @@
 class Solution {
     public void nextPermutation(int[] nums) {
-        int pivot = -1;
+        int pivot  = -1;
         int n = nums.length;
+        if(n == 1) return;
 
-        for (int i = n - 2; i >= 0; i--) {
-            if (nums[i] < nums[i + 1]) {
-                pivot = i;
+        for (int i = n-2; i >= 0; i--){
+            if(nums[i] < nums[i+1]){
+                pivot  = i;
                 break;
             }
         }
 
-        if (pivot != -1) {
+        if(pivot != -1){
             int j = n - 1;
-            while (nums[j] <= nums[pivot])
-                j--;
+            while(nums[j] <= nums[pivot]) j--;
 
-            // Swap pivot and that just-larger element
-            swap(nums, pivot, j);
+            swap(nums , pivot , j);
 
-            // 3) Pivot ke right wale suffix ko reverse karo -> smallest possible suffix ban jayega
-            reverse(nums, pivot + 1, n - 1);
-        } else {
-            reverse(nums, 0, n - 1);
-            return;
+            reverse(nums , pivot+1 , n-1);
+        }
+        else{
+            reverse(nums, 0 , n-1);
+            return ;
         }
     }
 
-    private void swap(int[] a, int i, int j) {
-        int t = a[i];
-        a[i] = a[j];
-        a[j] = t;
+    private void swap(int[] nums, int pivot , int j){
+        int temp = nums[pivot];
+        nums[pivot] = nums[j];
+        nums[j] = temp;
     }
 
-    // Utility: reverse subarray in-place
-    private void reverse(int[] a, int l, int r) {
-        // l < r use karo (<= se beech wala element unnecessary swap hoga)
-        while (l < r) {
-            swap(a, l++, r--);
+    private void reverse(int[] nums , int start , int end){
+        while(start < end){
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp; 
+            start++;
+            end--;
         }
     }
+
 }
-
-/*
-⏱️ Time Complexity: O(n)
-   - Pivot search O(n), just-larger search O(n) worst-case, reverse O(n), but sab linear passes hi hain.
-
-\U0001f4be Space Complexity: O(1)
-   - In-place swaps/reverse, koi extra array nahi.
-*/
