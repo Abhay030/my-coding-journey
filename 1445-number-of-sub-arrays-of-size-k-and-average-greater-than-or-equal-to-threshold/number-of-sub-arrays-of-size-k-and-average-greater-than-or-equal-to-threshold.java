@@ -1,26 +1,21 @@
 class Solution {
     public int numOfSubarrays(int[] arr, int k, int threshold) {
-        // Two Pointers to manage the window size
-        int left = 0 , right = 0;
+        return countSub(arr , k , threshold);
+    }
 
+    private int countSub(int[] arr , int k , int threshold){
+        int left = 0;
+        int count = 0;
         int sum = 0;
-        int n = arr.length; // size of the array.
-        int count = 0; // counter to store the subarrays having Average Greater than or Equal to Threshold
-        while(right < n){
-            sum += arr[right];
+        for(int i = 0; i < arr.length; i++){
+            sum += arr[i];
 
-            // condition to check Average Greater than or Equal to Threshold and size == k
-            if(right - left + 1 == k ){
-                if((sum/k) >= threshold){
-                    count++;
-                }
+            if(i-left+1 == k){
+                if(sum/k >= threshold) count++;
                 sum -= arr[left];
                 left++;
             }
-
-            right++;
         }
-
         return count;
     }
 }
