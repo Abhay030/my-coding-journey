@@ -1,0 +1,20 @@
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        int left = 0;
+        int freq[] = new int[2];
+        int maxi = 0;
+
+        for(int i = 0; i < nums.length; i++){
+            freq[nums[i]]++;
+
+            while((i - left +1) - freq[1] > k){
+                freq[nums[left]]--;
+                left++;
+            }
+
+            maxi = Math.max(maxi , (i - left + 1));
+        }
+
+        return maxi;
+    }
+}
